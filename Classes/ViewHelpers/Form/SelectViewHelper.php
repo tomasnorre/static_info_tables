@@ -90,7 +90,7 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $signalSlotDispatcher;
 
