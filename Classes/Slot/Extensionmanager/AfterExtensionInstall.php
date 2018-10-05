@@ -24,6 +24,7 @@ namespace SJBR\StaticInfoTables\Slot\Extensionmanager;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * AfterExtensionInstall slot
@@ -67,7 +68,7 @@ class AfterExtensionInstall {
 		if (strpos($extensionKey, 'static_info_tables') === 0) {
 			$extensionKeyParts = explode('_', $extensionKey);
 			if (count($extensionKeyParts) === 3) {
-				$extTablesStaticSqlRelFile = ExtensionManagementUtility::siteRelPath($extensionKey) . 'ext_tables_static+adt.sql';
+				$extTablesStaticSqlRelFile = PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath($extensionKey)) . 'ext_tables_static+adt.sql';
 			}
 			if (
 				// Base extension with data already imported once

@@ -61,31 +61,25 @@ class DatabaseUpdateUtility
 					$fields[$fN] = $fV[0];
 				}
 				if (count($fields)) {
-					if (class_exists('TYPO3\\CMS\\Core\\Database\\ConnectionPool')) {
-						$queryBuilder = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)->getQueryBuilderForTable($parsedResult['TABLE']);
-						$queryBuilder->getRestrictions()->removeAll();
-						$queryBuilder->update($parsedResult['TABLE']);
-						// We expect only a few of conditions combined by AND
-						$whereExpressions = [];
-						foreach ($parsedResult['WHERE'] as $k => $v) {
-							$whereExpressions[] = $queryBuilder->expr()->eq($v['field'], $queryBuilder->createNamedParameter($v['value'][0]));
+					$queryBuilder = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)->getQueryBuilderForTable($parsedResult['TABLE']);
+					$queryBuilder->getRestrictions()->removeAll();
+					$queryBuilder->update($parsedResult['TABLE']);
+					// We expect only a few of conditions combined by AND
+					$whereExpressions = [];
+					foreach ($parsedResult['WHERE'] as $k => $v) {
+						$whereExpressions[] = $queryBuilder->expr()->eq($v['field'], $queryBuilder->createNamedParameter($v['value'][0]));
+					}
+					if (count($whereExpressions)) {
+						$queryBuilder->where($whereExpressions[0]);
+						array_shift($whereExpressions);
+						foreach ($whereExpressions as $whereExpression) {
+							$queryBuilder->andWhere($whereExpression);
 						}
-						if (count($whereExpressions)) {
-							$queryBuilder->where($whereExpressions[0]);
-							array_shift($whereExpressions);
-							foreach ($whereExpressions as $whereExpression) {
-								$queryBuilder->andWhere($whereExpression);
-							}
-						}
-						foreach ($fields as $fN => $fV) {
-						   $queryBuilder->set($fN, $fV);
-						}
-						$queryBuilder->execute();
-				   	} else {
-				   		// WHERE clause
-				   		$whereClause = $sqlParser->compileWhereClause($parsedResult['WHERE']);
-				   		$res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery($parsedResult['TABLE'], $whereClause, $fields);
-				   	}
+					}
+					foreach ($fields as $fN => $fV) {
+					   $queryBuilder->set($fN, $fV);
+					}
+					$queryBuilder->execute();
 				}
 			}
 		}

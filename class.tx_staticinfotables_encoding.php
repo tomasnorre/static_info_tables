@@ -45,7 +45,7 @@ class tx_staticinfotables_encoding
 	 */
 	public function getEncodingSelect($elementName, $currentKey, $firstEntry='', $unsetEntries='')
 	{
-		GeneralUtility::logDeprecatedFunction();
+		trigger_error('Deprecated since 6.0, will be removed two versions later - Language pack should be re-created', E_USER_DEPRECATED);
 		$menuItems = array(
 			'utf-8' => 'UTF-8',
 		);

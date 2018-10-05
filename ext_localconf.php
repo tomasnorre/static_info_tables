@@ -81,7 +81,7 @@ call_user_func(
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$extKey]['enableManager'] = isset($extConf['enableManager']) ? $extConf['enableManager'] : '0';
 		// Make the extension version and constraints available when creating language packs and to other extensions
 		$emConfUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extensionmanager\Utility\EmConfUtility::class);
-		$emConf = $emConfUtility->includeEmConf(['key' => $extKey, 'siteRelPath' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($extKey)]);
+		$emConf = $emConfUtility->includeEmConf(['key' => $extKey, 'siteRelPath' =>  \TYPO3\CMS\Core\Utility\PathUtility::stripPathSitePrefix(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey))]);
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$extKey]['version'] = $emConf[$extKey]['version'];
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$extKey]['constraints'] = $emConf[$extKey]['constraints'];
 		// Configure translation of suggestions labels

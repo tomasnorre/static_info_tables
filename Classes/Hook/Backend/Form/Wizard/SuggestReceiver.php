@@ -152,42 +152,17 @@ class SuggestReceiver extends \TYPO3\CMS\Backend\Form\Wizard\SuggestWizardDefaul
 	 */
 	protected function prepareOrderByStatement()
 	{
-		if (class_exists('TYPO3\\CMS\\Core\\Database\\ConnectionPool')) {
-			// Get the label field for the current language, if any is available
-			$lang = LocalizationUtility::getCurrentLanguage();
-			$lang = LocalizationUtility::getIsoLanguageKey($lang);
-			$labelFields = LocalizationUtility::getLabelFields($this->table, $lang);
-			if (!empty($labelFields)) {
-				foreach ($labelFields as $labelField) {
-					$this->queryBuilder->addOrderBy($labelField);
-				}
-			} else 	if ($GLOBALS['TCA'][$this->table]['ctrl']['label']) {
-				$this->queryBuilder->addOrderBy($GLOBALS['TCA'][$this->table]['ctrl']['label']);
-			}
-		} else {
-			// TYPO3 CMS 7 LTS
-			$this->prepareCompatibleOrderByStatement();
-		}
-	}
-
-	/**
-	 * For TYPO3 CMS 7 LTS
-	 *
-	 * Prepares the clause by which the result elements are sorted. See description of ORDER BY in
-	 * SQL standard for reference.
-	 *
-	 * @return void
-	 */
-	protected function prepareCompatibleOrderByStatement()
-	{
-		if ($GLOBALS['TCA'][$this->table]['ctrl']['label']) {
-			$this->orderByStatement = $GLOBALS['TCA'][$this->table]['ctrl']['label'];
-		}
 		// Get the label field for the current language, if any is available
 		$lang = LocalizationUtility::getCurrentLanguage();
 		$lang = LocalizationUtility::getIsoLanguageKey($lang);
 		$labelFields = LocalizationUtility::getLabelFields($this->table, $lang);
-		$this->orderByStatement = implode(',' , $labelFields);
+		if (!empty($labelFields)) {
+			foreach ($labelFields as $labelField) {
+				$this->queryBuilder->addOrderBy($labelField);
+			}
+		} else 	if ($GLOBALS['TCA'][$this->table]['ctrl']['label']) {
+			$this->queryBuilder->addOrderBy($GLOBALS['TCA'][$this->table]['ctrl']['label']);
+		}
 	}
 
 	/**
