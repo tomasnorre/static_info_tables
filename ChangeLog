@@ -1,3 +1,9 @@
+2018-10-03 Tomas Norre Mikkelsen <tomasnorre(arobas)gmail.com>
+
+	* Removed TcaUtility
+	* Remove Support for TYPO3 7LTS
+	* Adds Support for TYPO3 9LTS
+
 2017-12-19  Stanislas Rolland  <typo3(arobas)sjbr.ca>
 
 	* Resolves #83060: Wrong table name in Configuration/TCA/Overrides/static_countries.php - Thanks to Simon Schaufelberger
