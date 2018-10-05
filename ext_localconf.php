@@ -86,7 +86,7 @@ call_user_func(
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$extKey]['constraints'] = $emConf[$extKey]['constraints'];
 		// Configure translation of suggestions labels
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $extKey . '/Configuration/PageTSconfig/Suggest.tsconfig">');
-		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Recordlist\RecordList\DatabaseRecordList::class]['buildQueryParameters'][] = \SJBR\StaticInfoTables\Hook\Backend\Recordlist\BuildQueryParameters::class;
+		//$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Recordlist\RecordList\DatabaseRecordList::class]['buildQueryParameters'][] = \SJBR\StaticInfoTables\Hook\Backend\Recordlist\BuildQueryParameters::class;
 	},
 	'static_info_tables'
 );
