@@ -25,13 +25,13 @@ namespace SJBR\StaticInfoTables;
  */
 
 use SJBR\StaticInfoTables\Cache\ClassCacheManager;
+use SJBR\StaticInfoTables\Service\SqlSchemaMigrationService;
 use SJBR\StaticInfoTables\Utility\DatabaseUpdateUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extensionmanager\Utility\InstallUtility;
-use TYPO3\CMS\Install\Service\SqlSchemaMigrationService;
 
 /**
  * Class for updating the db
