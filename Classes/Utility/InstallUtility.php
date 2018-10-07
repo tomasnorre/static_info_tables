@@ -27,9 +27,9 @@ class InstallUtility implements \TYPO3\CMS\Core\SingletonInterface
     protected $installToolSqlParser;
 
     /**
-     * @param SJBR\StaticInfoTables\Service\SqlSchemaMigrationService $installToolSqlParser
+     * @param \SJBR\StaticInfoTables\Service\SqlSchemaMigrationService $installToolSqlParser
      */
-    public function injectInstallToolSqlParser(SJBR\StaticInfoTables\Service\SqlSchemaMigrationService $installToolSqlParser )
+    public function injectInstallToolSqlParser(\SJBR\StaticInfoTables\Service\SqlSchemaMigrationService $installToolSqlParser )
     {
         $this->installToolSqlParser = $installToolSqlParser;
     }

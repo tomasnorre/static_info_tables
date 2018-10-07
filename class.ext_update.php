@@ -65,7 +65,7 @@ class ext_update
 		$this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$this->installTool = $this->objectManager->get(InstallUtility::class);
 		$installToolSqlParser = GeneralUtility::makeInstance(SqlSchemaMigrationService::class);
-		$this->installTool->injectInstallToolSqlParserinjectInstallToolSqlParser($installToolSqlParser);
+		$this->installTool->injectInstallToolSqlParser($installToolSqlParser);
 		$databaseUpdateUtility = GeneralUtility::makeInstance(DatabaseUpdateUtility::class);
 
 		// Clear the class cache
