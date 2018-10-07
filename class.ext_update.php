@@ -27,11 +27,11 @@ namespace SJBR\StaticInfoTables;
 use SJBR\StaticInfoTables\Cache\ClassCacheManager;
 use SJBR\StaticInfoTables\Service\SqlSchemaMigrationService;
 use SJBR\StaticInfoTables\Utility\DatabaseUpdateUtility;
+use SJBR\StaticInfoTables\Utility\InstallUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Extensionmanager\Utility\InstallUtility;
 
 /**
  * Class for updating the db
@@ -65,7 +65,7 @@ class ext_update
 		$this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$this->installTool = $this->objectManager->get(InstallUtility::class);
 		$installToolSqlParser = GeneralUtility::makeInstance(SqlSchemaMigrationService::class);
-		$this->installTool->injectInstallToolSqlParser($installToolSqlParser);
+		$this->installTool->injectInstallToolSqlParserinjectInstallToolSqlParser($installToolSqlParser);
 		$databaseUpdateUtility = GeneralUtility::makeInstance(DatabaseUpdateUtility::class);
 
 		// Clear the class cache
